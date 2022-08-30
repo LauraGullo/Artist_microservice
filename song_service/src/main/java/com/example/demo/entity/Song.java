@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +18,5 @@ public class Song {
     private Long id;
     private String name;
     private String album;
+    private Long idArtist;
 }
