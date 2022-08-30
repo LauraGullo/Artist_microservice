@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -39,10 +40,11 @@ public class ArtistService {
     }
 
     @Transactional
-    public Artist update(Long id, Artist artist) {
-        Optional<Artist> artistOld = artistRepository.findById(id);
-        Artist artistNew= artistOld.get();
-        return artistNew = artistRepository.save(artist);
+    public Artist updateArtist(Long id, Artist artist) {
+        Artist artistOld = artistRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Song not found by id: " + id));;
+        artistOld.setName(artist.getName());
+        artistOld.setBirthday(artist.getBirthday());
+        return artistRepository.save(artistOld);
     }
 
     public Song saveSong(Song song){

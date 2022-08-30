@@ -9,12 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="song_service" />
         <module name="demo (2)" />
-        <module name="demo (1)" />
+        <module name="demo" />
         <module name="artist_service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="artist_service" target="1.8" />
+      <module name="demo" target="1.8" />
       <module name="demo (1)" target="1.8" />
       <module name="demo (2)" target="1.8" />
       <module name="song_service" target="1.8" />
@@ -23,6 +24,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="artist_service" options="-parameters" />
+      <module name="demo" options="-parameters" />
       <module name="demo (1)" options="-parameters" />
       <module name="demo (2)" options="-parameters" />
       <module name="song_service" options="-parameters" />

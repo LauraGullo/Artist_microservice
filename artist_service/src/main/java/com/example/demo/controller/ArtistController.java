@@ -43,10 +43,8 @@ public class ArtistController {
     }
 
     @PutMapping("/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody Artist artist)  {
-
-        artistService.update(id, artist);
-
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Artist artist)  {
+        return new ResponseEntity<>(artistService.updateArtist(id, artist), HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(value = "/createSong")

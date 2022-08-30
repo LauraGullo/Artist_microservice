@@ -34,13 +34,6 @@ public class SongService {
     }
 
     @Transactional
-    public Song update(Long id, Song song) {
-        Optional<Song> songOld = songRepository.findById(id);
-        Song songNew= songOld.get();
-        return songNew = songRepository.save(song);
-    }
-
-    @Transactional
     public Song updateSong(Long id, Song song){
         Song songOld = songRepository.findById(id)
                 .orElseThrow(()-> new NoSuchElementException("Song not found by id: " + id));

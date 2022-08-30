@@ -41,7 +41,7 @@ public class SongController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Song song)  {
-        return new ResponseEntity<>(songService.update(id, song), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(songService.updateSong(id, song), HttpStatus.NO_CONTENT);
 
     }
 
