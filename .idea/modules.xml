@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Artist_microservice.iml" filepath="$PROJECT_DIR$/.idea/Artist_microservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/artist_service/artist_service.iml" filepath="$PROJECT_DIR$/artist_service/artist_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway_service/demo.iml" filepath="$PROJECT_DIR$/gateway_service/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/song_service/song_service.iml" filepath="$PROJECT_DIR$/song_service/song_service.iml" />
     </modules>
   </component>
