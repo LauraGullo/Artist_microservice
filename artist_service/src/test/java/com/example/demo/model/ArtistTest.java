@@ -12,6 +12,7 @@ class ArtistTest {
     Artist artist;
     @BeforeEach
     void setUp() {
+
         artist = new Artist(1L, "Laura", LocalDate.of(1986,04,12));
     }
 
