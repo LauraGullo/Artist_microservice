@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/artist_service
     username: root
-    password: 261997
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
