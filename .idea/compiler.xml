@@ -8,9 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-service" />
-        <module name="song_service" />
         <module name="config-service" />
         <module name="demo (2)" />
+        <module name="demo (1)" />
+        <module name="song_service" />
         <module name="demo" />
         <module name="artist_service" />
       </profile>
