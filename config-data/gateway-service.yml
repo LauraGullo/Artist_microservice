@@ -21,7 +21,7 @@ spring:
         - id: song-service
           uri: lb://song-service
           predicates:
-            - Path=/artist/**
+            - Path=/song/**
 
 
 
