@@ -57,4 +57,14 @@ public class ArtistController {
         return ResponseEntity.ok(artistService.findSongsByArtist(id));
     }
 
+    @GetMapping("/datos")
+    public String getDatos(){
+        return artistService.getDatos();
+    }
+
+    @GetMapping("/mayor")
+    public List<Artist> getMayor(){
+        return artistService.getArtitsMayor();
+    }
+
 }

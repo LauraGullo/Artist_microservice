@@ -8,9 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,5 +57,16 @@ public class ArtistService {
 
     public List<Song> findSongsByArtist(Long id){
         return songFeignClient.findSongByIdArtist(id);
+    }
+
+    public String getDatos(){
+        List<Artist> artists = artistRepository.findAll();
+        return artists.stream().map( a -> a.getName() + " " + a.getBirthday()).collect(Collectors.joining("\n"));
+    }
+
+    public List<Artist> getArtitsMayor(){
+        List<Artist> artistList = artistRepository.findAll();
+        return artistList.stream().filter(a -> Period.between(a.getBirthday(),
+                LocalDate.now()).getYears() > 25).collect(Collectors.toList());
     }
 }
