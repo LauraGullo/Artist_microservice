@@ -51,6 +51,7 @@ public class ArtistController {
     public ResponseEntity<Song> saveSong(@RequestBody Song song){
         return new ResponseEntity<>(artistService.saveSong(song), HttpStatus.CREATED);
     }
+
     @CircuitBreaker(name="songCB", fallbackMethod = "fallBackFindSong")
     @GetMapping("/getAllSongs/{id}")
     public ResponseEntity<List<Song>> findSongs(@PathVariable Long id){
@@ -58,8 +59,10 @@ public class ArtistController {
     }
 
 
-    private ResponseEntity<List<Song>> fallBackFindSong(@PathVariable("id") int id, RuntimeException e) {
+    private ResponseEntity<List<Song>> fallBackFindSong(@PathVariable("id") Long id, RuntimeException e) {
         return new ResponseEntity("No se puede encontrar la canción", HttpStatus.OK);
     }
+
+
 
 }
