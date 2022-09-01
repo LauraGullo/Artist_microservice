@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SongService {
@@ -47,6 +48,11 @@ public class SongService {
 
     public List<Song> findSongByIdArtist(Long id){
         return songRepository.findByIdArtist(id);
+    }
+
+    public String get(){
+        List<Song> songs = songRepository.findAll();
+        return songs.stream().map(song -> song.getName() + " - " + song.getAlbum()).collect(Collectors.joining( "\n"));
     }
 
 

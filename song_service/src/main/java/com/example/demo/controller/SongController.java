@@ -50,4 +50,8 @@ public class SongController {
         return ResponseEntity.ok(songService.findSongByIdArtist(id));
     }
 
+  @GetMapping("/datos")
+  public ResponseEntity<?> getDatos(){
+      return   ResponseEntity.ok(songService.get());
+  }
 }

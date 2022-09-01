@@ -58,13 +58,13 @@ public class ArtistController {
     }
 
     @GetMapping("/datos")
-    public String getDatos(){
-        return artistService.getDatos();
+    public ResponseEntity<?> getDatos(){
+        return   ResponseEntity.ok(artistService.getDatos());
     }
 
     @GetMapping("/mayor")
-    public List<Artist> getMayor(){
-        return artistService.getArtitsMayor();
+    public ResponseEntity<?> getMayores(){
+        return   ResponseEntity.ok(artistService.getArtitsMayor());
     }
 
 }
