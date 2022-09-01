@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Artist;
+import com.example.demo.entity.Artist;
+import com.example.demo.model.Song;
 import com.example.demo.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,11 +43,18 @@ public class ArtistController {
     }
 
     @PutMapping("/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody Artist artist)  {
-
-        artistService.update(id, artist);
-
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Artist artist)  {
+        return new ResponseEntity<>(artistService.updateArtist(id, artist), HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping(value = "/createSong")
+    public ResponseEntity<Song> saveSong(@RequestBody Song song){
+        return new ResponseEntity<>(artistService.saveSong(song), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getAllSongs/{id}")
+    public ResponseEntity<List<Song>> findSongs(@PathVariable Long id){
+        return ResponseEntity.ok(artistService.findSongsByArtist(id));
+    }
 
 }
