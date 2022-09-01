@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Artist;
+import com.example.demo.entity.Artist;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,7 +24,7 @@ class ArtistRepositoryTest {
     void findAll(){
         List<Artist> artistList = artistRepository.findAll();
         assertFalse(artistList.isEmpty());
-        assertTrue(artistList.size()>0);
+        assertEquals(2, artistList.size());
     }
 
     @Test

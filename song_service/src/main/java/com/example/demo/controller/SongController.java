@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Song;
+import com.example.demo.entity.Song;
 import com.example.demo.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,10 +40,14 @@ public class SongController {
     }
 
     @PutMapping("/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody Song song)  {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Song song)  {
+        return new ResponseEntity<>(songService.updateSong(id, song), HttpStatus.NO_CONTENT);
 
-        songService.update(id, song);
+    }
 
+    @GetMapping("/byArtist/{id}")
+    public ResponseEntity<List<Song>> findSongByIdArtist(@PathVariable Long id){
+        return ResponseEntity.ok(songService.findSongByIdArtist(id));
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Artist;
+import com.example.demo.entity.Artist;
 import com.example.demo.repository.ArtistRepository;
 import com.example.demo.service.ArtistService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -95,7 +95,7 @@ class ArtistControllerTest {
     void update() throws Exception {
         Artist newArtist = new Artist(1L, "Laura", LocalDate.of(1986,11,12));
         Artist updateArtist = new Artist(2L, "Martin", LocalDate.of(1982,10,12));
-        when(artistService.update(1L, newArtist)).thenReturn(updateArtist);
+        when(artistService.updateArtist(1L, newArtist)).thenReturn(updateArtist);
         mockMvc.perform(MockMvcRequestBuilders.put("/artist/update/1").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updateArtist)))
                 .andExpect(MockMvcResultMatchers.status().isOk());

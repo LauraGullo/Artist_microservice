@@ -1,13 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Song;
+import com.example.demo.entity.Song;
 import com.example.demo.repository.SongRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +25,10 @@ class SongServiceTest {
     @InjectMocks
     SongService songService;
 
-
     @Test
     void createSong() {
-        Song newSong = new Song(1L, "Cancion01" , "Album01");
-        Song songCreated = new Song(2L, "Cancion02" , "Album02");
+        Song newSong = new Song(1L, "Cancion01" , "Album01", 2L);
+        Song songCreated = new Song(2L, "Cancion02" , "Album02", 2L);
         when(songRepository.save(newSong)).thenReturn(songCreated);
         assertNotNull(songService.createSong(newSong));
         assertTrue(songService.createSong(newSong).getId()>0);
@@ -40,8 +38,8 @@ class SongServiceTest {
     @Test
     void findAll() {
         List<Song> songList = new ArrayList<>();
-        songList.add(new Song(1L,"Cancion01", "Album01"));
-        songList.add(new Song(2L,"Cancion02", "Album02"));
+        songList.add(new Song(1L,"Cancion01", "Album01", 2L));
+        songList.add(new Song(2L,"Cancion02", "Album02", 2L));
         when(songRepository.findAll()).thenReturn(songList);
         assertTrue(songService.findAll().size()>0);
 
@@ -49,7 +47,7 @@ class SongServiceTest {
 
     @Test
     void findById() {
-        Song song=new Song(1L,"Cancion01", "Album01");
+        Song song=new Song(1L,"Cancion01", "Album01", 2L);
         when(songRepository.findById(anyLong())).thenReturn(of(song));
         assertNotNull(songService.findById(1L));
         assertEquals("Cancion01", songService.findById(1L).get().getName());
@@ -58,7 +56,7 @@ class SongServiceTest {
 
     @Test
     void deleteSong() {
-        Song song=new Song(1L,"Cancion01", "Album01");
+        Song song=new Song(1L,"Cancion01", "Album01", 2L);
         when (songRepository.findById(1L)).thenReturn(Optional.empty());
         doNothing().when(songRepository).delete(song);
         assertFalse(songService.findById(song.getId()).isPresent());
@@ -66,10 +64,10 @@ class SongServiceTest {
 
     @Test
     void update() {
-        Song song=new Song(1L,"Cancion01", "Album01");
+        Song song=new Song(1L,"Cancion01", "Album01", 2L);
         when(songRepository.save(song)).thenReturn(song);
-        when(songRepository.findById(1L)).thenReturn(Optional.ofNullable(song));
-        Song song1 = songService.update(1L,song);
+        when(songRepository.findById(1L)).thenReturn(Optional.of(song));
+        Song song1 = songService.updateSong(1L,song);
         assertNotNull(song1);
         assertNotNull(song1.getId());
 

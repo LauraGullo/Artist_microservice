@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Artist;
+import com.example.demo.entity.Artist;
 import com.example.demo.repository.ArtistRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -65,10 +65,10 @@ class ArtistServiceTest {
     void update() {
         Artist artist=new Artist(1L,"Martin", LocalDate.of(1980,12,12));
         when(artistRepository.save(artist)).thenReturn(artist);
-        when(artistRepository.findById(1L)).thenReturn(ofNullable(artist));
-        Artist updateArtist = artistService.update(1L,artist);
+        when(artistRepository.findById(1L)).thenReturn(of(artist));
+        Artist updateArtist = artistService.updateArtist(1L,artist);
         assertNotNull(updateArtist);
-        assertNotNull(artistService.update(1L, artist));
+        assertNotNull(artistService.updateArtist(1L, artist));
 
     }
 }
