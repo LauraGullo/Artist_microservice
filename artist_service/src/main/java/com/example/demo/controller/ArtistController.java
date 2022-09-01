@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Artist;
 import com.example.demo.model.Song;
 import com.example.demo.service.ArtistService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,15 +47,19 @@ public class ArtistController {
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Artist artist)  {
         return new ResponseEntity<>(artistService.updateArtist(id, artist), HttpStatus.NO_CONTENT);
     }
-
     @PostMapping(value = "/createSong")
     public ResponseEntity<Song> saveSong(@RequestBody Song song){
         return new ResponseEntity<>(artistService.saveSong(song), HttpStatus.CREATED);
     }
-
+    @CircuitBreaker(name="songCB", fallbackMethod = "fallBackFindSong")
     @GetMapping("/getAllSongs/{id}")
     public ResponseEntity<List<Song>> findSongs(@PathVariable Long id){
         return ResponseEntity.ok(artistService.findSongsByArtist(id));
+    }
+
+
+    private ResponseEntity<List<Song>> fallBackFindSong(@PathVariable("id") int id, RuntimeException e) {
+        return new ResponseEntity("No se puede encontrar la canción", HttpStatus.OK);
     }
 
 }
