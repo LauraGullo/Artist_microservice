@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -31,17 +30,15 @@ class ArtistServiceTest {
         Artist createdArtist = new Artist(2L, "Martin" , LocalDate.now());
         when(artistRepository.save(newArtist)).thenReturn(createdArtist);
         assertNotNull(artistService.createArtist(newArtist));
-
     }
 
     @Test
     void findAll() {
         List<Artist> artistList = new ArrayList<>();
-        artistList.add(new Artist(1L,"Maria", LocalDate.of(1986,01,01)));
+        artistList.add(new Artist(1L,"Maria", LocalDate.of(1986,1,1)));
         artistList.add(new Artist(2L,"Martin", LocalDate.of(1980,12,12)));
         when(artistRepository.findAll()).thenReturn(artistList);
         assertFalse(artistService.findAll().isEmpty());
-
     }
 
     @Test
@@ -49,7 +46,6 @@ class ArtistServiceTest {
         Artist artist=new Artist(1L,"Martin", LocalDate.of(1980,12,12));
         when(artistRepository.findById(anyLong())).thenReturn(of(artist));
         assertNotNull(artistService.findById(1L));
-
     }
 
     @Test
@@ -58,7 +54,6 @@ class ArtistServiceTest {
         doNothing().when(artistRepository).deleteById(artist.getId());
         artistService.deleteArtist(artist.getId());
         verify(artistRepository).deleteById(1L);
-
     }
 
     @Test
@@ -69,6 +64,5 @@ class ArtistServiceTest {
         Artist updateArtist = artistService.updateArtist(1L,artist);
         assertNotNull(updateArtist);
         assertNotNull(artistService.updateArtist(1L, artist));
-
     }
 }

@@ -33,7 +33,7 @@ public class SongController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<?> deleteSong(@PathVariable Long id) {
 
         songService.deleteSong(id);
         return ResponseEntity.ok("song delete");

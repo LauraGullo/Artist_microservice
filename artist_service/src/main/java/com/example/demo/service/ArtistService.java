@@ -5,7 +5,6 @@ import com.example.demo.feignclients.SongFeignClient;
 import com.example.demo.model.Song;
 import com.example.demo.repository.ArtistRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +24,12 @@ public class ArtistService {
     public Artist createArtist(Artist artist) {
         return artistRepository.save(artist);
     }
+
     @Transactional
     public List<Artist> findAll() {
         return artistRepository.findAll();
     }
+
     @Transactional
     public Optional<Artist> findById(Long id)  {
         return artistRepository.findById(id);
