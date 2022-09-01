@@ -39,7 +39,6 @@ class SongControllerTest {
 
     ObjectMapper objectMapper;
 
-
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
@@ -66,7 +65,6 @@ class SongControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(jsonPath("$[0].name").value("Cancion01"))
                 .andExpect(jsonPath("$[1].album").value("Album02"));
-
     }
 
     @Test
@@ -90,11 +88,11 @@ class SongControllerTest {
     @Test
     void update() throws Exception {
         Song newSong = new Song(1L, "Cancion01", "Album01", 2L);
-        Song updateSong = new Song(2L, "Cancion02", "Album02", 2L);
+        Song updateSong = new Song(1L, "Cancion02", "Album02", 2L);
         when(songService.updateSong(1L, newSong)).thenReturn(updateSong);
         mockMvc.perform(MockMvcRequestBuilders.put("/song/update/1").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updateSong)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
 
     }
 }

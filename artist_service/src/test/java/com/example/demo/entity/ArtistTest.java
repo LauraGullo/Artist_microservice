@@ -16,13 +16,9 @@ class ArtistTest {
         artist = new Artist(1L, "Laura", LocalDate.of(1986,4,12));
     }
 
-
-
     @Test
     void getId() {
-        assertTrue(artist.getId()== 1);
         assertEquals(1,artist.getId());
-
     }
 
     @Test

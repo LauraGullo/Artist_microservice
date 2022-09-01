@@ -1,6 +1,5 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
-import com.example.demo.entity.Song;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +55,7 @@ class SongTest {
 
     @Test
     void testToString() {
-        assertEquals("Song(id=1, name=Cancion01, album=album01)", song.toString());
+        assertEquals("Song(id=1, name=Cancion01, album=album01, idArtist=2)", song.toString());
 
     }
 }
