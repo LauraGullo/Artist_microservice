@@ -41,14 +41,11 @@ class ArtistControllerTest {
 
     ObjectMapper objectMapper;
 
-
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
     }
-
-
 
     @Test
     void createArtist() throws Exception {
@@ -78,7 +75,7 @@ class ArtistControllerTest {
     @Test
     void getOneById() throws Exception {
         Artist artist = new Artist(null, "Maria", LocalDate.of(1986,11,12));
-        when(artistService.findById(1L)).thenReturn(Optional.ofNullable(artist));
+        when(artistService.findById(1L)).thenReturn(Optional.of(artist));
         mockMvc.perform(MockMvcRequestBuilders.get("/artist/getOne/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(jsonPath("$.name").value("Maria"));
@@ -94,11 +91,11 @@ class ArtistControllerTest {
     @Test
     void update() throws Exception {
         Artist newArtist = new Artist(1L, "Laura", LocalDate.of(1986,11,12));
-        Artist updateArtist = new Artist(2L, "Martin", LocalDate.of(1982,10,12));
+        Artist updateArtist = new Artist(1L, "Martin", LocalDate.of(1982,10,12));
         when(artistService.updateArtist(1L, newArtist)).thenReturn(updateArtist);
         mockMvc.perform(MockMvcRequestBuilders.put("/artist/update/1").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updateArtist)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
 }

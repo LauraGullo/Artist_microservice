@@ -11,13 +11,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ArtistRepositoryTest {
+
     @Autowired
     ArtistRepository artistRepository;
 
     @Test
     void findById(){
         assertTrue(artistRepository.findById(1L).isPresent());
-
     }
 
     @Test
@@ -29,8 +29,7 @@ class ArtistRepositoryTest {
 
     @Test
     void create(){
-        Artist artist = new Artist(1L, "laura", LocalDate.of(1986,11,12));
-        Artist artist1 = artistRepository.save(artist);
+        Artist artist1 = artistRepository.save(new Artist(1L, "laura", LocalDate.of(1986,11,12)));
         assertTrue(artist1.getId()>0);
     }
 
@@ -40,6 +39,5 @@ class ArtistRepositoryTest {
         artistRepository.delete(artist);
         assertFalse(artistRepository.findById(1L).isPresent());
     }
-
 
 }

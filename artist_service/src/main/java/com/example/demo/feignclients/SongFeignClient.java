@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "song-service", url = "http://localhost:8003/song")
+@FeignClient(name = "song-service", path = "/song")
 public interface SongFeignClient {
 
     @PostMapping(value = "/create")
