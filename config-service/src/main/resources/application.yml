@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          default-label: develop
+          default-label: feature/laura
           uri: https://github.com/LauraGullo/Artist_microservice
           search-paths: config-data
 
