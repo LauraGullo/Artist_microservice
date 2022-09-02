@@ -9,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +59,11 @@ public class ArtistService {
 
     public List<Song> findSongsByArtist(Long id){
         return songFeignClient.findSongByIdArtist(id);
+    }
+
+    public Map<String, Object> countOfSongByArtist(){
+        List<Artist> artists = artistRepository.findAll();
+        return artists.stream()
+                .collect(Collectors.toMap(Artist::getName, artist -> findSongsByArtist(artist.getId())));
     }
 }

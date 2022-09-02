@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -55,4 +56,8 @@ public class ArtistController {
         return ResponseEntity.ok(artistService.findSongsByArtist(id));
     }
 
+    @GetMapping("/discography")
+    public ResponseEntity<Map<String, Object>> countOfSongsByArtist(){
+        return ResponseEntity.ok(artistService.countOfSongByArtist());
+    }
 }
