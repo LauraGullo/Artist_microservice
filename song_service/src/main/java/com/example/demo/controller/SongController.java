@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/song")
 public class SongController {
@@ -28,13 +28,11 @@ public class SongController {
 
     @GetMapping("/getOne/{id}")
     public ResponseEntity<?> getOneById(@PathVariable("id") Long id) {
-        Optional<Song> song = songService.findById(id);
-        return ResponseEntity.ok(song);
+        return ResponseEntity.ok(songService.findById(id));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteSong(@PathVariable Long id) {
-
         songService.deleteSong(id);
         return ResponseEntity.ok("song delete");
     }
