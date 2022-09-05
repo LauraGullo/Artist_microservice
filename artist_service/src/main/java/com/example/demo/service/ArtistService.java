@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Artist;
+import com.example.demo.exception.ArtistNotFound;
 import com.example.demo.feignclients.SongFeignClient;
 import com.example.demo.model.Song;
 import com.example.demo.repository.ArtistRepository;
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,18 +30,21 @@ public class ArtistService {
     }
 
     @Transactional
-    public Optional<Artist> findById(Long id)  {
-        return artistRepository.findById(id);
+    public Artist findById(Long id)  {
+        return artistRepository.findById(id)
+                .orElseThrow(()->new ArtistNotFound("Song not found by id: " + id));
     }
 
     @Transactional
     public void deleteArtist(Long id) {
-        artistRepository.deleteById(id);
+        //Artist artist = this.findById(id);
+        artistRepository.deleteById(this.findById(id).getId());
     }
 
     @Transactional
     public Artist updateArtist(Long id, Artist artist) {
-        Artist artistOld = artistRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Song not found by id: " + id));;
+        Artist artistOld = artistRepository.findById(id)
+                .orElseThrow(()-> new ArtistNotFound("Song not found by id: " + id));;
         artistOld.setName(artist.getName());
         artistOld.setBirthday(artist.getBirthday());
         return artistRepository.save(artistOld);

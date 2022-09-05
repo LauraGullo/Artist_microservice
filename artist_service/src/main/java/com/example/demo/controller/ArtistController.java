@@ -19,10 +19,10 @@ public class ArtistController {
     @Autowired
     private ArtistService artistService;
 
-    @PostMapping(value = "/create")
+    @PostMapping("/create")
     public ResponseEntity<Artist> createArtist(@RequestBody Artist artist) {
         Artist artist1 = artistService.createArtist(artist);
-        return new ResponseEntity<Artist>(artist1, HttpStatus.CREATED);
+        return new ResponseEntity<>(artist1, HttpStatus.CREATED);
     }
 
     @GetMapping("/getAll")
@@ -32,13 +32,11 @@ public class ArtistController {
 
     @GetMapping("/getOne/{id}")
     public ResponseEntity<?> getOneById(@PathVariable("id") Long id) {
-        Optional<Artist> artist = artistService.findById(id);
-        return ResponseEntity.ok(artist);
+        return ResponseEntity.ok(artistService.findById(id));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
-
         artistService.deleteArtist(id);
         return ResponseEntity.ok("artist delete");
     }
