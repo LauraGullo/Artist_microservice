@@ -2,14 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Artist;
 import com.example.demo.exception.ArtistNotFound;
-import com.example.demo.feignclients.SongFeignClient;
+import com.example.demo.model.feignclients.SongFeignClient;
 import com.example.demo.model.Song;
 import com.example.demo.repository.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
