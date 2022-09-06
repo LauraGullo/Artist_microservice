@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/song")
@@ -21,6 +22,13 @@ import java.util.List;
 public class SongController {
     @Autowired
     private SongService songService;
+
+    @GetMapping("/test")
+    public String testServiceA(@RequestHeader Map<String, String> headers) {
+        System.out.println(headers);
+
+        return "Request HTTP Headers:" + headers;
+    }
 
     @Operation(summary = "Create a song", description = "Save a new song to the database")
     @ApiResponse(responseCode = "201", description = "The song created",
