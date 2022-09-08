@@ -22,9 +22,5 @@ spring:
           uri: lb://song-service
           predicates:
             - Path=/song/**
-        - id: security-service
-            uri: lb://security-service
-            predicates:
-              - Path=/users/**
 
 
