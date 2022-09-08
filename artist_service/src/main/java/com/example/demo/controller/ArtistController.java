@@ -25,8 +25,11 @@ public class ArtistController {
         return new ResponseEntity<>(artist1, HttpStatus.CREATED);
     }
 
+
+
     @GetMapping("/getAll")
     public ResponseEntity<List<Artist>> findAll() {
+
         return ResponseEntity.ok(artistService.findAll());
     }
 
@@ -36,7 +39,7 @@ public class ArtistController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<?> deleteArtist(@PathVariable Long id) {
         artistService.deleteArtist(id);
         return ResponseEntity.ok("artist delete");
     }

@@ -19,6 +19,8 @@ public class ArtistService {
 
     private final SongFeignClient songFeignClient;
 
+
+
     @Transactional
     public Artist createArtist(Artist artist) {
         return artistRepository.save(artist);
