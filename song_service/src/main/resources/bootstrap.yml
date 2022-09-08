@@ -6,11 +6,6 @@ spring:
       enabled: true
       uri: http://localhost:8081
 
-server:
-  forward-headers-strategy: framework
-
 spring-doc:
-  api-docs:
-    path: /song-docs
-  cache:
-    disabled: true
+  subpackage: com.example.demo
+

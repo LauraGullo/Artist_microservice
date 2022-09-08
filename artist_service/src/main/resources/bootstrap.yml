@@ -5,12 +5,8 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
-
 spring-doc:
-  api-docs:
-    path: /artist-docs
-#server:
-#  forward-headers-strategy: framework
+  subpackage: com.example.demo
 
 
 

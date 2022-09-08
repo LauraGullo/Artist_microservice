@@ -1,6 +1,6 @@
 server:
   port: 8080
-  forward-headers-strategy: framework
+#  forward-headers-strategy: framework
 
 eureka:
   client:
@@ -20,12 +20,26 @@ spring:
           uri: lb://artist-service
           predicates:
             - Path=/artist/**
+          filters:
+            - RewritePath=/artist/(?<path>.*), /$\{path}
         - id: song-service
           uri: lb://song-service
           predicates:
             - Path=/song/**
           filters:
-            - StripPrefix=2
-
+            - RewritePath=/song/(?<path>.*), /$\{path}
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+spring-doc:
+  swagger-ui:
+    urls:
+      - name: artist
+        url: /v3/api-docs/artist
+      - name: song
+        url: /v3/api-docs/song
 
 
