@@ -7,5 +7,5 @@ spring:
       uri: http://localhost:8081
 
 spring-doc:
-  subpackage: com.example.demo
+  subpackage: com.example.demo.controller.SongController
 

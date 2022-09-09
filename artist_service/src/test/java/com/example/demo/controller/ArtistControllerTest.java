@@ -74,8 +74,8 @@ class ArtistControllerTest {
 
     @Test
     void getOneById() throws Exception {
-        Artist artist = new Artist(null, "Maria", LocalDate.of(1986,11,12));
-        when(artistService.findById(1L)).thenReturn(Optional.of(artist));
+        Artist artist = new Artist(1L, "Maria", LocalDate.of(1986,11,12));
+        when(artistService.findById(1L)).thenReturn(artist);
         mockMvc.perform(MockMvcRequestBuilders.get("/artist/getOne/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(jsonPath("$.name").value("Maria"));
