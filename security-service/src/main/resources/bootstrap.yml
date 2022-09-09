@@ -1,15 +1,8 @@
 spring:
   application:
-    name: artist-service
+    name: security-service
   cloud:
     config:
       enabled: true
       uri: http://localhost:8081
-
-springdoc:
-  api-docs:
-    path: /api-docs
-
-
-
 
