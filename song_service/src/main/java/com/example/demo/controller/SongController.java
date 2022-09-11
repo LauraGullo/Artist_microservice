@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.SongDTO;
 import com.example.demo.entity.Song;
 import com.example.demo.service.SongService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,9 +36,9 @@ public class SongController {
             content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Song.class)) })
     @PostMapping(value = "/create")
-    public ResponseEntity<Song> createSong(@RequestBody Song song) {
-        Song song1 = songService.createSong(song);
-        return new ResponseEntity<Song>(song1, HttpStatus.CREATED);
+    public ResponseEntity<SongDTO> createSong(@RequestBody SongDTO songDTO) {
+        SongDTO song1 = songService.createSong(songDTO);
+        return new ResponseEntity<>(song1, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get a list of songs", description = "Get a list of all songs from the database")
@@ -45,7 +46,7 @@ public class SongController {
             content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Song.class)) })
     @GetMapping("/getAll")
-    public ResponseEntity<List<Song>> findAll() {
+    public ResponseEntity<List<SongDTO>> findAll() {
         return ResponseEntity.ok(songService.findAll());
     }
 
@@ -57,7 +58,7 @@ public class SongController {
     @ApiResponse(responseCode = "404", description = "Song not found",
             content = @Content) })
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<?> getOneById(@PathVariable("id") Long id) {
+    public ResponseEntity<SongDTO> getOneById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(songService.findById(id));
     }
 
@@ -82,8 +83,8 @@ public class SongController {
             @ApiResponse(responseCode = "404", description = "Song not found",
                     content = @Content) })
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Song song)  {
-        return new ResponseEntity<>(songService.updateSong(id, song), HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SongDTO songDTO)  {
+        return new ResponseEntity<>(songService.updateSong(id, songDTO), HttpStatus.NO_CONTENT);
 
     }
 
@@ -92,7 +93,7 @@ public class SongController {
             content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Song.class)) })
     @GetMapping("/byArtist/{id}")
-    public ResponseEntity<List<Song>> findSongByIdArtist(@PathVariable Long id){
+    public ResponseEntity<List<SongDTO>> findSongByIdArtist(@PathVariable Long id){
         return ResponseEntity.ok(songService.findSongByIdArtist(id));
     }
 

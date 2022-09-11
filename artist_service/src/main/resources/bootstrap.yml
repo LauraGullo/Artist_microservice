@@ -9,8 +9,8 @@ spring:
 spring-doc:
   api-docs:
     path: /artist-docs
-#server:
-#  forward-headers-strategy: framework
+  cache:
+    disabled: true
 
 
 

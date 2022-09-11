@@ -17,9 +17,10 @@ public class SongServiceApplication {
 		SpringApplication.run(SongServiceApplication.class, args);
 	}
 
+	/*
 	@Bean
 	ForwardedHeaderFilter forwardedHeaderFilter() {
 		return new ForwardedHeaderFilter();
 	}
-
+	 */
 }
