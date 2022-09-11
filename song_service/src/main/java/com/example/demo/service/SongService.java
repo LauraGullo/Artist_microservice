@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,6 +54,7 @@ public class SongService {
 
     @Transactional
     public void deleteSong(Long id) {
+        log.info("Looking for song to delete by id: " + id);
         Optional<Song> song = songRepository.findById(id);
         if (!song.isPresent()){
             log.warn("The song was not found by the id");
@@ -64,14 +66,14 @@ public class SongService {
 
     @Transactional
     public SongDTO updateSong(Long id, SongDTO songDTO){
-        log.info("Looking for song by id: " + id);
+        log.info("Looking for song to update by id: " + id);
         Song songOld = songRepository.findById(id)
                 .orElseThrow(()-> new SongNotFound("Song not found by id: " + id));
         songOld.setName(songDTO.getName());
         songOld.setAlbum(songDTO.getAlbum());
         songOld.setIdArtist(songDTO.getIdArtist());
         songRepository.save(songOld);
-        log.info("Song successfully saved");
+        log.info("Song successfully updated");
         return modelMapper.map(songOld, SongDTO.class);
     }
 

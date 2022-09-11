@@ -12,8 +12,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +38,7 @@ public class SongController {
             content = { @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Song.class)) })
     @PostMapping(value = "/create")
-    public ResponseEntity<SongDTO> createSong(@RequestBody SongDTO songDTO) {
+    public ResponseEntity<SongDTO> createSong(@Valid @RequestBody SongDTO songDTO) {
         SongDTO song1 = songService.createSong(songDTO);
         return new ResponseEntity<>(song1, HttpStatus.CREATED);
     }
@@ -83,7 +85,7 @@ public class SongController {
             @ApiResponse(responseCode = "404", description = "Song not found",
                     content = @Content) })
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SongDTO songDTO)  {
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody SongDTO songDTO)  {
         return new ResponseEntity<>(songService.updateSong(id, songDTO), HttpStatus.NO_CONTENT);
 
     }

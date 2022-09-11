@@ -1,4 +1,4 @@
-package com.example.demo.model.feignclients;
+package com.example.demo.feignclients;
 
 import com.example.demo.model.Song;
 import org.springframework.cloud.openfeign.FeignClient;
